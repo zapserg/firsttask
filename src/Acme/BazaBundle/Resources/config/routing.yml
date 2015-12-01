@@ -1,0 +1,11 @@
+produkt_show:
+   path: /product/{name}/{famil}/{mail}
+   defaults: { _controller: AcmeBazaBundle:Default:productShow }
+
+kategor_show:
+   path: /kategor
+   defaults: { _controller: AcmeBazaBundle:Default:showKategor }
+
+kategor_create:
+   path: /crkategor
+   defaults: { _controller: AcmeBazaBundle:Default:createKategor }   

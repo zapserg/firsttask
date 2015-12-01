@@ -1,0 +1,23 @@
+{% extends 'AcmeBazaBundle:Baza:index.html.twig' %}
+
+{% block title %}Выборка продуктов{% endblock %} 
+
+{% block sidebar %}
+    
+    {{ parent() }}
+    <h3>Table of Contents</h3>
+{% endblock %}
+
+{#
+    {% block body %} 
+    Hello {{ famil }}  {{ name }}  !
+          
+    Your mail: {{ mail }}       
+    {% endblock %}
+#}
+
+    {% block body %} 
+    {% for article in articles %}
+        <a href="/article/{{ article.id }}"> {{ article.name }} </a><br>
+      {% endfor %}      
+    {% endblock %}    

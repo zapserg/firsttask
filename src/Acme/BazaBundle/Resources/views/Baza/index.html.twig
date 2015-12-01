@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Первая СТРАНИЦА{% endblock %}</title>
+
+         <style type="text/css">
+            .div1{    
+                width: 70%;
+                min-height: 150px;
+                background: #ccc;
+                float: left;
+            }
+            .div2{    
+                width: 30%;
+                min-height: 150px;
+                background: #c00;   
+                margin-left: 70%;
+            }
+         </style>
+    </head>
+    <body>
+        <div id="sidebar">
+            {% block sidebar %}
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+            {% endblock %}
+        </div>
+
+       {# <div id="content">#}
+        
+        <div class="div1">{% block body %}{% endblock %}</div>
+        <div class="div2">{% block body1 %}dgvsdgvs{% endblock %}</div>  
+        {#</div>#}
+    </body>
+</html>
