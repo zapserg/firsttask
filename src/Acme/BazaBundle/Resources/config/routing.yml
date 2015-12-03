@@ -1,11 +1,11 @@
-produkt_show:
-   path: /product/{name}/{famil}/{mail}
-   defaults: { _controller: AcmeBazaBundle:Default:productShow }
+all_tovar_show:
+   path: /alltovar
+   defaults: { _controller: AcmeBazaBundle:Default:showTovar }
 
 kategor_show:
    path: /kategor
    defaults: { _controller: AcmeBazaBundle:Default:showKategor }
 
-kategor_create:
-   path: /crkategor
-   defaults: { _controller: AcmeBazaBundle:Default:createKategor }   
+tovar_show:
+   path: /tovar/{idtovar}
+   defaults: { _controller: AcmeBazaBundle:Default:showProduct }   

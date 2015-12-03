@@ -3,7 +3,7 @@
 namespace Acme\BazaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Acme\StoreBundle\Entity\Tovar;
 /**
  * Kategor
  *
@@ -28,6 +28,20 @@ class Kategor
      */
     private $name;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Acme\BazaBundle\Entity\Tovar", mappedBy="idkategor")
+     */
+    private $idtovar;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idtovar = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -62,5 +76,39 @@ class Kategor
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add idtovar
+     *
+     * @param \Acme\BazaBundle\Entity\Tovar $idtovar
+     *
+     * @return Kategor
+     */
+    public function addIdtovar(\Acme\BazaBundle\Entity\Tovar $idtovar)
+    {
+        $this->idtovar[] = $idtovar;
+
+        return $this;
+    }
+
+    /**
+     * Remove idtovar
+     *
+     * @param \Acme\BazaBundle\Entity\Tovar $idtovar
+     */
+    public function removeIdtovar(\Acme\BazaBundle\Entity\Tovar $idtovar)
+    {
+        $this->idtovar->removeElement($idtovar);
+    }
+
+    /**
+     * Get idtovar
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdtovar()
+    {
+        return $this->idtovar;
     }
 }

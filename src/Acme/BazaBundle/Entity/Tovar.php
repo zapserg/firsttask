@@ -3,6 +3,7 @@
 namespace Acme\BazaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Acme\StoreBundle\Entity\Kategor;
 
 /**
  * Tovar
@@ -28,6 +29,28 @@ class Tovar
      */
     private $name;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Acme\BazaBundle\Entity\Kategor", inversedBy="idtovar")
+     * @ORM\JoinTable(name="svaz",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="idTovar", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="idKategor", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $idkategor;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->idkategor = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -62,5 +85,39 @@ class Tovar
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add idkategor
+     *
+     * @param \Acme\BazaBundle\Entity\Kategor $idkategor
+     *
+     * @return Tovar
+     */
+    public function addIdkategor(\Acme\BazaBundle\Entity\Kategor $idkategor)
+    {
+        $this->idkategor[] = $idkategor;
+
+        return $this;
+    }
+
+    /**
+     * Remove idkategor
+     *
+     * @param \Acme\BazaBundle\Entity\Kategor $idkategor
+     */
+    public function removeIdkategor(\Acme\BazaBundle\Entity\Kategor $idkategor)
+    {
+        $this->idkategor->removeElement($idkategor);
+    }
+
+    /**
+     * Get idkategor
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdkategor()
+    {
+        return $this->idkategor;
     }
 }
