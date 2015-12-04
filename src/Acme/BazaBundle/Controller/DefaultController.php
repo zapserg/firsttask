@@ -12,18 +12,25 @@ use Acme\StoreBundle\Entity\Tovar;
 class DefaultController extends Controller
 {    
     /**
-     * @Route("/alltovar")
+     * @Route("/")
      * @Template()
     */
     public function showTovarAction()
         {
-             $tovar=$this->getDoctrine()->getRepository('AcmeBazaBundle:Tovar')->findAll();
+            $tovar=$this->getDoctrine()->getRepository('AcmeBazaBundle:Tovar')->findAll();
              
              if(!$tovar)
-                {
-                throw $this->createNotFoundException('No tovar found');
-                }
-            return $this->render('AcmeBazaBundle:Baza:index.html.twig', array('tovars' => $tovar));     
+               {
+               throw $this->createNotFoundException('No tovar found');
+               }
+         
+            // Creating pagnination
+            $paginator  = $this->get('knp_paginator');
+            $pagination = $paginator->paginate(
+                $tovar,
+            $this->get('request')->query->get('page', 1),3);
+
+            return $this->render('AcmeBazaBundle::index.html.twig', array('pagination' => $pagination)); 
         }
 
     /**
@@ -40,7 +47,7 @@ class DefaultController extends Controller
                 throw $this->createNotFoundException('No kategor found');
                 }
 
-            return $this->render('AcmeBazaBundle:Baza:categor.html.twig', array('articles' => $kategor));      
+            return $this->render('AcmeBazaBundle:category:name/categor.html.twig', array('articles' => $kategor));      
         }       
 
     /**
@@ -54,7 +61,13 @@ class DefaultController extends Controller
                 ->find($idtovar);
 
             $products = $category->getIdtovar();
- 
-        return $this->render('AcmeBazaBundle:Baza:product.html.twig', array('products' => $products));
+
+             // Creating pagnination
+            $paginator  = $this->get('knp_paginator');
+            $pagination = $paginator->paginate(
+                $products,
+                $this->get('request')->query->get('page', 1),3);
+
+            return $this->render('AcmeBazaBundle:item:name/product.html.twig', array('products' => $pagination));
         }
 }

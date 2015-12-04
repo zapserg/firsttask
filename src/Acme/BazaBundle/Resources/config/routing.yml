@@ -1,5 +1,5 @@
 all_tovar_show:
-   path: /alltovar
+   path: /
    defaults: { _controller: AcmeBazaBundle:Default:showTovar }
 
 kategor_show:
